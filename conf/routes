@@ -1,0 +1,16 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+
+POST    /auth                       controllers.AuthController.auth
+
+# API Documentation
+# Swagger - Root Resources Listing
+GET     /                           controllers.ApiDocController.view
+GET     /api                        controllers.ApiHelpController.getResources
+GET     /api/auth                   controllers.ApiHelpController.getResource(path = "/auth")
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
