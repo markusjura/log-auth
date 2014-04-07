@@ -35,7 +35,7 @@ object AuthController extends Controller {
     new ApiImplicitParam(name = "body", value = "JSON body must contain a username and password.", required = false,
       dataType = "application/json", paramType = "body", defaultValue = authBodyDefaultValue)))
   @ApiResponses(Array(
-    new ApiResponse(code = 200, message = "Username and password is valid. Returns a token. The token contains the encrypted username."),
+    new ApiResponse(code = 200, message = "Username and password is valid."),
     new ApiResponse(code = 400, message = "Username or password not supplied."),
     new ApiResponse(code = 400, message = "Password is incorrect."),
     new ApiResponse(code = 400, message = "Username doesn't exist.")))
@@ -55,9 +55,8 @@ object AuthController extends Controller {
       case Some((username, password)) => {
         if (credentials.contains(username)) {
           if (password == credentials(username)) {
-            val token = Crypto.signToken(username)
-            Logger.debug(s"Authentication successful. New token: $token")
-            Ok(Json.obj("token" -> token))
+            Logger.debug(s"Authentication successful.")
+            Ok(Json.obj("success" -> true))
           } else {
             Logger.debug("Authentication error: Password is incorrect.")
             Unauthorized(Json.obj("error" -> "Password is incorrect."))
