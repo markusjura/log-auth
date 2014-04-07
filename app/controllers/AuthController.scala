@@ -37,8 +37,8 @@ object AuthController extends Controller {
   @ApiResponses(Array(
     new ApiResponse(code = 200, message = "Username and password is valid."),
     new ApiResponse(code = 400, message = "Username or password not supplied."),
-    new ApiResponse(code = 400, message = "Password is incorrect."),
-    new ApiResponse(code = 400, message = "Username doesn't exist.")))
+    new ApiResponse(code = 401, message = "Password is incorrect."),
+    new ApiResponse(code = 401, message = "Username doesn't exist.")))
   def auth = Action(parse.json) { request =>
     val usernameAndPasswordFromReqOpt =
       for {
