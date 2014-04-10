@@ -2,10 +2,12 @@ import play.Project._
 
 name := """log-auth"""
 
-version := "0.1.0"
+version := "1.0"
+
+resolvers += Resolver.url("Markus Jura fork swagger-play2", url("http://markusjura.github.com/swagger-play2"))(Resolver.ivyStylePatterns)
 
 libraryDependencies ++= Seq(
-  "com.wordnik" %% "swagger-play2" % "1.3.4"
+  "swagger-play2" %% "swagger-play2" % "1.3.5"
 )
 
-playScalaSettings
+lazy val root = (project in file(".")).addPlugins(PlayScala)
